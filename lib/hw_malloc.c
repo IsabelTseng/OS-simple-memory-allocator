@@ -140,7 +140,9 @@ void *hw_malloc(size_t bytes)
         map_memory = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
         // printf("%d --- 0x%08lx\n", size, map_memory);
         chunk_header *now = mmap_head;
-        chunk_header newnode= {NULL, NULL, {chunk_header_size, size, 0, 1}};
+        chunk_header newnode= {NULL, NULL, .size_and_flag = {chunk_header_size, size, 0, 1}};
+        newnode.size_and_flag.current_chunk_size = size;
+        // printf("%d!!%d!!\n",size,newnode.size_and_flag.current_chunk_size);
         // memcpy(map_memory,&newnode,sizeof(chunk_header));
         *((chunk_header*)map_memory) = newnode;
         // printf("%d!!\n",(*((chunk_header*)map_memory)).size_and_flag.current_chunk_size);

@@ -17,8 +17,8 @@ typedef long long int chunk_flag_t;
 
 typedef struct chunk_header_info {
     unsigned int pre_chunk_size : 31;
-    unsigned int current_chunk_size : 31;
     unsigned int allocated_flag : 1;
+    unsigned int current_chunk_size : 31;
     unsigned int mmap_flag : 1;
 } chunk_header_info;
 

@@ -4,13 +4,13 @@
 int main(int argc, char *argv[])
 {
     init();
-    printf("%d\n",sizeof(long long int));
+    // printf("%d\n",sizeof(long long int));
     char *get_f = malloc(20*sizeof(char));
     char *get_s = malloc(20*sizeof(char));
 
-    struct chunk_header a;
+
     // printf("chunk_header size: %ld\n", sizeof(a.size_and_flag));
-    // printf("chunk_header size: %ld\n", sizeof(chunk_header_info));
+    // printf("struct chunk_header_info size: %ld\n", sizeof(struct chunk_header));
 
     while(scanf("%s %s",get_f,get_s)!=EOF) {
         if(strcmp(get_f,"alloc")==0) {
