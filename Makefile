@@ -13,10 +13,10 @@ $(GIT_HOOKS):
 	@echo
 
 $(EXEC): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS)
+	$(CC) $(CFLAGS) -o $@ $(OBJS) -lm
 
 hw4_mm_test.o: %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ 
 
 ./lib/hw_malloc.o:
 	$(MAKE) -C $(SUBDIR)
