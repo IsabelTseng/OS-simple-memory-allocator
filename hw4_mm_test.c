@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 void init()
 {
     // chunk_header_info initinfo = {24, 24, 0, 1};
-    chunk_header inithead = {NULL, NULL, {24, 24, 0, 1}};
+    chunk_header inithead = {NULL, NULL, {sizeof(struct chunk_header), sizeof(struct chunk_header), 0, 1}};
     head = inithead;
     mmap_head = &head;
     head.prev = mmap_head;
