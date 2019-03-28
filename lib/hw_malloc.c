@@ -140,7 +140,7 @@ void *hw_malloc(size_t bytes)
         map_memory = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
         // printf("%d --- 0x%08lx\n", size, map_memory);
         chunk_header *now = mmap_head;
-        chunk_header newnode= {NULL, NULL, .size_and_flag = {chunk_header_size, size, 0, 1}};
+        chunk_header newnode= {NULL, NULL, .size_and_flag = {chunk_header_size, 0, size, 1}};
         newnode.size_and_flag.current_chunk_size = size;
         // printf("%d!!%d!!\n",size,newnode.size_and_flag.current_chunk_size);
         // memcpy(map_memory,&newnode,sizeof(chunk_header));
@@ -171,14 +171,14 @@ void *hw_malloc(size_t bytes)
             //create bin
             int i;
             for (i = 0; i < 10; i++) {
-                chunk_header initbin = {&bin[i], &bin[i], {chunk_header_size, chunk_header_size, 0, 0}};
+                chunk_header initbin = {&bin[i], &bin[i], {chunk_header_size, 0, chunk_header_size, 0}};
                 bin[i] = initbin;
             }
 
-            chunk_header newchunk = {&bin[10], &bin[10], {chunk_header_size, free_space/2, 0, 0}};
+            chunk_header newchunk = {&bin[10], &bin[10], {chunk_header_size, 0, free_space/2, 0}};
             *free_chunk = newchunk;
             next_chunk = (long long int)free_chunk + free_space/2;
-            chunk_header newchunk2 = {&bin[10], &bin[10], {free_space/2, free_space/2, 0, 0}};
+            chunk_header newchunk2 = {&bin[10], &bin[10], {free_space/2, 0, free_space/2, 0}};
             *next_chunk = newchunk2;
 
             set_chunk_free_flag(free_chunk, 1);
